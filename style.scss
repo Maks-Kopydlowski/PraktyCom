@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Mono", monospace;
+  border: unset;
+  background: unset;
+}
+
+header {
+  background-color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4vh;
+  padding: 1vh;
+  #logo {
+    h1 {
+      a {
+        color: #cba135;
+        text-decoration: none;
+      }
+    }
+  }
+  #login {
+    img {
+      height: 5vh;
+      cursor: pointer;
+    }
+  }
+  #opcje {
+    display: none;
+    position: absolute;
+    background: #000;
+    right: 1vw;
+    top: 6.1vh;
+    padding: 1vh;
+
+    ul {
+      list-style: none;
+      li {
+        margin: 0.5vh;
+      }
+      a {
+        color: white;
+        display: block;
+        margin: 0.5vh;
+      }
+      a:hover {
+        color: #cba135;
+      }
+      #wyloguj {
+        font-size: 1rem;
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      #wyloguj:hover {
+        color: #cba135;
+      }
+    }
+  }
+}
+main {
+  background-color: #f3efe0;
+  // padding-top: 10vh;
+  height: 94vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  #oglsozenia {
+    margin: 5vh 0 0 0;
+    .ogloszenie {
+      align-items: start;
+      padding: 1vw;
+      margin: 0 15vw 0 15vw;
+      border: solid #000 1px;
+      margin-bottom: 1vh;
+      width: 60vw;
+      display: flex;
+      justify-content: space-between;
+      a {
+        color: #cba135;
+      }
+      #gwiazda {
+        color: black;
+        font-size: 1.5rem;
+        height: unset;
+        cursor: pointer;
+      }
+      #gwiazdaUlobione {
+        color: #cba135;
+        font-size: 1.5rem;
+      }
+    }
+    #numery {
+      display: flex;
+      justify-content: center;
+      a {
+        margin: 0 0.2vw 0 0.2vw;
+      }
+    }
+  }
+}
+#mainRejestracja {
+  padding: 0 15vw 0 15vw;
+  height: 94vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .button {
+    cursor: pointer;
+  }
+  div {
+    margin: 1vw;
+  }
+  .opisy {
+    p {
+      margin-bottom: 1vh;
+      font-weight: 1000;
+    }
+    ul {
+      margin-left: 0.1vw;
+    }
+  }
+  .formularzRejestracja {
+    width: 30vw;
+    height: 50vh;
+    border: black solid 1px;
+    text-align: center;
+
+    form {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      input {
+        border: 1px solid black;
+        margin: 1vh;
+        padding: 0.1vh;
+      }
+    }
+  }
+}
+#mainLogowanie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  #loginPraktykant {
+    display: block;
+  }
+  #loginPracodawca {
+    display: none;
+  }
+  #loginButtons {
+    display: flex;
+    flex-direction: row;
+    #typKontaPraktykant {
+      cursor: pointer;
+      border: solid black 1px;
+      margin: 1vw;
+      padding: 1vw;
+    }
+    #typKontaPracodawca {
+      cursor: pointer;
+      border: solid black 1px;
+      margin: 1vw;
+      padding: 1vw;
+    }
+  }
+}
