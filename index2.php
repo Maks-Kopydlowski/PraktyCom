@@ -117,7 +117,6 @@ function generatePageLink($page, $label, $params = '') {
         ?>
     </div>
 </main>
-
     <script src="script.js"></script>
 </body>
 </html>

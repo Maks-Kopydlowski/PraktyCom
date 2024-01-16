@@ -1,0 +1,145 @@
+SYSTEM POLUBIEŃ:
+$queryPolubione = "SELECT * FROM polubienia WHERE id_praktykanta = $idUzytkownika";
+$resultPolubione = mysqli_query($conn, $queryPolubione);
+if ($resultPolubione && mysqli_num_rows($resultPolubione) > 0) {
+    while ($rowPolubione = mysqli_fetch_assoc($resultPolubione)) {
+        $idOferty = $rowPolubione['id_oferty'];
+        $idPraktykanta = $rowPolubione['id_praktykanta'];
+        if($idOferty == $id_ogloszenia && $idPraktykanta == $idUzytkownika){
+            echo '<form action="#" method="post">';
+            echo '<input type="hidden" name="id_ogloszenia" value="'.$id_ogloszenia.'">';
+            echo '<input type="submit" value="Nie lubię">';
+            echo '</form>';
+            if(isset($_POST['id_ogloszenia'])) {
+                $idOgloszenia = $_POST['id_ogloszenia'];
+                $queryDelete = "DELETE FROM polubienia WHERE id_oferty=$idOgloszenia AND id_praktykanta=$idUzytkownika";
+                mysqli_query($conn, $queryDelete);
+                header("Location: ".$_SERVER['PHP_SELF']);
+            }
+        }else{
+            echo '<form action="#" method="post">';
+            echo '<input type="hidden" name="id_ogloszenia" value="'.$id_ogloszenia.'">';
+            echo '<input type="submit" value="Lubię">';
+            echo '</form>';
+            if(isset($_POST['id_ogloszenia'])) {
+                $idOgloszenia = $_POST['id_ogloszenia'];
+                $queryAdd = "INSERT INTO (id_oferty, id_praktykanta) VALUES polubienia id_oferty=$idOgloszenia AND id_praktykanta=$idUzytkownika";
+                mysqli_query($conn, $queryAdd);
+            }
+        }
+    }
+}
+
+PRZYKŁAD:
+<?php
+session_start();
+include "connection.php"; // Połączenie z bazą danych
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obsługa logowania, sprawdzenie danych użytkownika, np. email i hasło
+
+    // Przykładowe pobranie ID użytkownika po zalogowaniu
+    $id_uzytkownika = 1; // Pobierz ID z bazy danych na podstawie danych logowania
+
+    // Przekierowanie do profilu po zalogowaniu
+    header("Location: profil.php?id=" . $id_uzytkownika);
+    exit();
+}
+?>
+<!-- Tworzenie formularza logowania -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logowanie</title>
+</head>
+<body>
+    <h2>Logowanie</h2>
+    <form action="" method="post">
+        <!-- Pola formularza logowania -->
+        <input type="email" name="email" placeholder="E-mail" required><br>
+        <input type="password" name="haslo" placeholder="Hasło" required><br>
+        <input type="submit" value="Zaloguj">
+    </form>
+</body>
+</html>
+
+PRZYKŁAD LOGOWANIA:
+<?php
+session_start();
+include "polaczenie.php"; // Połączenie z bazą danych
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if(isset($_SESSION['email'])) {
+        header("Location: konto.php"); // Przekierowanie, jeśli użytkownik jest już zalogowany
+        exit();
+    }
+
+    $email = $_POST['email'];
+    $haslo = $_POST['haslo'];
+    $sql = "SELECT * FROM uzytkownik WHERE email='$email'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($haslo, $row['haslo'])) {
+            $_SESSION['email'] = $email; // Utworzenie sesji dla zalogowanego użytkownika
+            header("Location: konto.php");
+            exit();
+        } else {
+            echo $row['haslo'];
+            echo "Niepoprawne hasło";
+        }
+    } else {
+        echo "Użytkownik o podanym adresie email nie istnieje.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logowanie</title>
+</head>
+<body>
+    <h2>Logowanie</h2>
+    <form action="zaloguj.php" method="post">
+        <input type="email" name="email" placeholder="E-mail" required><br>
+        <input type="password" name="haslo" placeholder="Hasło" required><br>
+        <input type="submit" value="Zaloguj">
+    </form>
+</body>
+</html>
+
+KONTO:
+<?php
+session_start();
+include "connection.php"; // Połączenie z bazą danych
+
+if(isset($_GET['id'])) {
+    $id_uzytkownika = $_GET['id'];
+
+    // Pobierz dane użytkownika na podstawie ID
+    $query = "SELECT imie, nazwisko FROM praktykanci WHERE id = '$id_uzytkownika'"; // Zmodyfikuj zapytanie zgodnie z twoją strukturą bazy danych
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        // Wyświetlenie informacji o użytkowniku
+        echo "<h1>Profil użytkownika: " . $row['imie'] . " " . $row['nazwisko'] . "</h1>";
+        // Wyświetl pozostałe informacje
+    } else {
+        $id_uzytkownika = $_GET['id'];
+        $query = "SELECT firma FROM pracodawcy WHERE id = '$id_uzytkownika'"; // Zmodyfikuj zapytanie zgodnie z twoją strukturą bazy danych
+        $result = mysqli_query($conn, $query);
+    
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            // Wyświetlenie informacji o użytkowniku
+            echo "<h1>Profil użytkownika: " . $row['firma'] . "</h1>";
+            // Wyświetl pozostałe informacje
+        }
+    }
+} else {
+    echo "Brak ID użytkownika.";
+}
+?>

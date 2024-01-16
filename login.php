@@ -29,10 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($typ_konta === 'praktykant') {
                 $_SESSION['user_imie'] = $row['imie'];
                 $_SESSION['user_nazwisko'] = $row['nazwisko'];
-                header("Location: panelPraktykanta.php?user=".$row['imie'].'.'.$row['nazwisko'].'.'.$row['id']);
+                // header("Location: panelPraktykanta.php?user=".$row['imie'].'.'.$row['nazwisko'].'.'.$row['id']);
+                header("Location: index.php");
             } elseif ($typ_konta === 'pracodawca') {
                 $_SESSION['user_firma'] = $row['id'];
-                header("Location: panelPracodawcy.php?user=".$row['firma'].'.'.$row['firma']);
+                header("Location: index.php");
+                // header("Location: panelPracodawcy.php?user=".$row['firma'].'.'.$row['firma']);
             }
             exit();
         } else {
