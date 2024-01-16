@@ -4,6 +4,7 @@
   font-family: "Roboto Mono", monospace;
   border: unset;
   background: unset;
+  font-size: 1.2rem;
 }
 
 header {
@@ -63,30 +64,42 @@ header {
 main {
   background-color: #f3efe0;
   // padding-top: 10vh;
-  height: 94vh;
+  min-height: 100vh;
   margin: 0;
   display: flex;
   align-items: center;
   flex-direction: column;
   #oglsozenia {
-    margin: 5vh 0 0 0;
+    margin: 5vh 0 2vh 0;
     .ogloszenie {
       align-items: start;
       padding: 1vw;
       margin: 0 15vw 0 15vw;
-      border: solid #000 1px;
+      border: solid rgba(0, 0, 0, 0.3) 1px;
       margin-bottom: 1vh;
       width: 60vw;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      #daneOferty {
+        display: flex;
+        align-items: center;
+        p {
+          margin: 0 0 0 0.5vw;
+        }
+        // gwiazda {
+        // }
+      }
       a {
         color: #cba135;
       }
+
       #gwiazda {
         color: black;
         font-size: 1.5rem;
         height: unset;
         cursor: pointer;
+        margin: 0 0 0 0.5vw;
       }
       #gwiazdaUlobione {
         color: #cba135;
@@ -100,6 +113,9 @@ main {
         margin: 0 0.2vw 0 0.2vw;
       }
     }
+  }
+  .przyciskiStrony {
+    color: #cba135;
   }
 }
 #mainRejestracja {
@@ -148,10 +164,26 @@ main {
   align-items: center;
   flex-direction: column;
   #loginPraktykant {
-    display: block;
+    display: none;
+    justify-content: unset;
+    align-items: unset;
+    flex-direction: column;
+    margin: 1vh 0 1vh 0;
+    input {
+      border: 1px solid black;
+      padding: 0.1vh;
+    }
   }
   #loginPracodawca {
     display: none;
+    justify-content: unset;
+    align-items: unset;
+    flex-direction: column;
+    margin: 1vh 0 1vh 0;
+    input {
+      border: 1px solid black;
+      padding: 0.1vh;
+    }
   }
   #loginButtons {
     display: flex;

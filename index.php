@@ -37,8 +37,6 @@ session_start();
         </div>
     </header>
     <main>
-        <form action="">
-        </form>
         <div id="oglsozenia">
         <?php
         $ofertyNaStrone = 10;
@@ -66,33 +64,53 @@ session_start();
                 $firma = $row['firma'];
                 $firmaId = $row['id'];
                 $lokalizacja = $row['lokalizacja'];
+                $poziom = $row['poziom'];
                 echo '<div class="ogloszenie">';
-                echo '<a href="jobad.php?id=' . $id_ogloszenia . '">' . $tytul . '</a>';
-                echo '<div><a href="panelPracodawca.php?'.$firma.'.'.$firmaId.'">'.$firma.'</a>, '.$lokalizacja;
+                echo '<a href="jobad.php?id=' . $id_ogloszenia . '">' . $tytul . '<p>'.$poziom.'</p></a>';
+                echo '<div id="daneOferty"><a href="panelPracodawca.php?'.$firma.'.'.$firmaId.'">'.$firma.'</a>, <p>'.$lokalizacja.'</p>';
                 if(isset($_SESSION['user_imie']) && $_SESSION['user_nazwisko'] && $_SESSION['user_id']){
-                    // if(sprawdź czy polubione){jeśli tak wyświetl złotą gwizdę}else{wyświetl kontur}
-                    echo '<form action="like.php" method="post"><input type="submit" value="&#9734;"></form>';
-                }else{}
+//SYSTEM POLUBIEŃ - GWIAZDKA
+                }
                 echo '</div>';
                 echo '</div>';
             }
         } else {
             echo "Brak danych lub błąd zapytania.";
         }
-
         $query = "SELECT COUNT(id) AS ilosc_ofert FROM oferty";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
         $ilosc_ofert = $row['ilosc_ofert'];
-
         $liczba_stron = ceil($ilosc_ofert / $ofertyNaStrone);
+            // Tworzenie linków do stron
         echo "<div id='numery'>";
-        for ($i = 1; $i <= $liczba_stron; $i++) {
-            echo "<a href='index.php?strona=$i'>$i</a> ";
+        if ($liczba_stron > 1) {
+            // Przycisk do pierwszej strony
+            echo "<a href='index.php?strona=1' id='pierwszaStrona' class='przyciskiStrony'>&laquo;&laquo;</a> ";
+            // Przycisk do poprzedniej strony
+            if ($strona > 1) {
+                $poprzednia = $strona - 1;
+                echo "<a href='index.php?strona=$poprzednia' id='poprzedniaStrona' class='przyciskiStrony'>&laquo;</a> ";
+            }
+            // Linki do kolejnych stron
+            for ($i = 1; $i <= $liczba_stron; $i++) {
+                if ($i == $strona) {
+                    echo "<span class='active'>$i</span> ";
+                } else {
+                    echo "<a href='index.php?strona=$i' class='przyciskiStrony'>$i</a> ";
+                }
+            }
+            // Przycisk do następnej strony
+            if ($strona < $liczba_stron) {
+                $nastepna = $strona + 1;
+                echo "<a href='index.php?strona=$nastepna' id='nastepnaStrona' class='przyciskiStrony'>&raquo;</a> ";
+            }
+            // Przycisk do ostatniej strony
+            echo "<a href='index.php?strona=$liczba_stron' id='ostatniaStrona' class='przyciskiStrony'>&raquo;&raquo;</a> ";
         }
         echo "</div>";
-        ?>
-        </div>
+    ?>
+    </div>
     </main>
     <script src="script.js"></script>
 </body>

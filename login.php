@@ -67,15 +67,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form action="" method="post" id="loginPraktykant">
         <input type="email" name="email" placeholder="E-mail" required><br>
         <input type="password" name="haslo" placeholder="Hasło" required><br>
+        <input type="hidden" id="typ_konta" name="typ_konta" value="praktykant">
         <input type="submit" value="Zaloguj">
     </form>
     <form action="" method="post" id="loginPracodawca">
         <input type="email" name="email" placeholder="E-mail" required><br>
         <input type="password" name="haslo" placeholder="Hasło" required><br>
+        <input type="hidden" id="typ_konta" name="typ_konta" value="pracodawca">
         <input type="submit" value="Zaloguj">
     </form>
     <div id="loginButtons">
-    <button id="typKontaPraktykant">Praktykant</button> <button id="typKontaPracodawca">Pracodawca</button>
+    <button id="typKontaPraktykant">jako Praktykant</button>
+    <button id="typKontaPracodawca">jako Pracodawca</button>
     </div>
     </main>
     <script src="script.js"></script>
