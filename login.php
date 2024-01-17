@@ -1,7 +1,13 @@
 <?php
+include "connection.php";
 session_start();
-include "connection.php"; // Połączenie z bazą danych
 
+$loginPage = 'login.php';
+$signupPage = 'singup.php';
+
+function generatePageLink($page, $label, $params = '', $class) {
+    return "<a href='$page?$params' class='$class' >$label</a>";
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $haslo = $_POST['haslo'];
@@ -45,38 +51,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-<!-- Formularz logowania dla praktykantów i pracodawców -->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.scss">
+    <link rel="stylesheet" href="style.css">
     <title>PraktyCom</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@100;300&display=swap" rel="stylesheet">
 </head>
-    <title>Logowanie</title>
-</head>
 <body>
-    <header>
-        <div id="logo"><h1><a href="index.php">PraktyCom</a></h1></div>
-        <div id="login"><img src="img/user.png" alt="Zaloguj"></div>    
-    </header>
-    <main id="mainLogowanie">
+<header>
+    <a href="index.php" id="logo">PraktyCom</a>
+    <div id="opcje">
+    <?php
+    if (isset($_SESSION['user_id'])) {
+        if (isset($_SESSION['user_imie']) && isset($_SESSION['user_nazwisko'])) {
+            $userParams = $_SESSION['user_imie'] . '.' . $_SESSION['user_nazwisko'] . '.' . $_SESSION['user_id'];
+            echo generatePageLink('panelPraktykanta.php', 'Konto', $userParams, '');
+        } elseif (isset($_SESSION['user_firma'])) {
+            $userParams = $_SESSION['user_firma'] . '.' . $_SESSION['user_id'];
+            echo generatePageLink('panelPracodawcy.php', 'Konto', $userParams, '');
+        }
+        echo generatePageLink('logout.php', 'Wyloguj', '', '');
+    } else {
+        echo generatePageLink($loginPage, 'Zaloguj się', '', '');
+        echo generatePageLink($signupPage, 'Zarejestruj się', '', '');
+    }
+    ?>
+    </div>
+</header>
+    <main>
     <h2>Logowanie</h2>
-    <form action="" method="post" id="loginPraktykant">
-        <input type="email" name="email" placeholder="E-mail" required><br>
-        <input type="password" name="haslo" placeholder="Hasło" required><br>
-        <input type="hidden" id="typ_konta" name="typ_konta" value="praktykant">
-        <input type="submit" value="Zaloguj">
+    <form action="" method="post" id="loginPraktykant" class="loginBox">
+        <input type="email" name="email" placeholder="E-mail" class="inputText" required><br>
+        <input type="password" name="haslo" placeholder="Hasło" class="inputText" required><br>
+        <input type="hidden" class="typ_konta" name="typ_konta" value="praktykant">
+        <input type="submit" value="Zaloguj" class="loginButton">
     </form>
-    <form action="" method="post" id="loginPracodawca">
-        <input type="email" name="email" placeholder="E-mail" required><br>
-        <input type="password" name="haslo" placeholder="Hasło" required><br>
-        <input type="hidden" id="typ_konta" name="typ_konta" value="pracodawca">
-        <input type="submit" value="Zaloguj">
+    <form action="" method="post" id="loginPracodawca" class="loginBox">
+        <input type="email" name="email" placeholder="E-mail" class="inputText" required><br>
+        <input type="password" name="haslo" placeholder="Hasło" class="inputText" required><br>
+        <input type="hidden" class="typ_konta" name="typ_konta" value="pracodawca">
+        <input type="submit" value="Zaloguj" class="loginButton">
     </form>
     <div id="loginButtons">
     <button id="typKontaPraktykant">jako Praktykant</button>

@@ -1,13 +1,13 @@
-
 <?php
-    include "connection.php";
-    session_start();
-    $loginPage = 'login.php';
-    $signupPage = 'singup.php';
-    $panelPracodawca = 'panelPracodawca.php';
-    function generatePageLink($page, $label, $params = '', $class) {
-        return "<a href='$page?$params' class='$class' >$label</a>";
-    }
+include "connection.php";
+session_start();
+
+$loginPage = 'login.php';
+$signupPage = 'singup.php';
+
+function generatePageLink($page, $label, $params = '', $class) {
+    return "<a href='$page?$params' class='$class' >$label</a>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -65,7 +65,8 @@
             echo '<h1>' . $tytul . '</h1>';
             echo '<h2><a href="panelPracodawca.php?' . htmlspecialchars($firma) . '.' . htmlspecialchars($firmaId) . '">' . htmlspecialchars($firma) . '</a>, ' . htmlspecialchars($lokalizacja);'</h2>';
             echo '<h2>Poziom: ' . $poziom . '</h2>';
-            echo '<p>' . $opis . '</p>';
+            echo '<pre>' . $opis . '</pre>';
+            echo '<button>APLIKUJ</button>';
         } else {
             echo "Brak danych lub błąd zapytania.";
         }

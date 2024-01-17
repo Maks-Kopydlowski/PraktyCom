@@ -42,7 +42,7 @@ function generatePageLink($page, $label, $params = '', $class) {
     </div>
 </header>
 <main>
-    <div id="oglsozenia">
+    <div id="ogloszenia">
         <?php
         $ofertyNaStrone = 10;
 
@@ -93,7 +93,9 @@ function generatePageLink($page, $label, $params = '', $class) {
 
         echo "<div class='numery'>";
         if ($liczba_stron > 1) {
+            if($strona > 1){
             echo generatePageLink('index.php', '&laquo;&laquo;', '', '');
+            }
             if ($strona > 1) {
                 $poprzednia = $strona - 1;
                 echo generatePageLink('index.php', '&laquo;', "strona=$poprzednia", '');
@@ -109,7 +111,9 @@ function generatePageLink($page, $label, $params = '', $class) {
                 $nastepna = $strona + 1;
                 echo generatePageLink('index.php', '&raquo;', "strona=$nastepna", '');
             }
+            if($strona != $liczba_stron){
             echo generatePageLink('index.php', '&raquo;&raquo;', "strona=$liczba_stron", '');
+            }
         }
         echo "</div>";
         ?>

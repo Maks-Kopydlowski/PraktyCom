@@ -14,7 +14,8 @@ header {
   align-items: center;
   justify-content: space-between;
   height: 7vh;
-  border-bottom: solid #0b3142 1px;
+  width: 100vw;
+  box-shadow: 0 0 10px 0;
 }
 header #logo {
   font-size: 1.8rem;
@@ -41,60 +42,125 @@ header #opcje a:hover {
   text-decoration: underline;
 }
 
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 main {
-  margin: 5vh 10vw 0 10vw;
+  margin: 5vh 0 0 0;
   min-height: 50vh;
+}
+main pre {
+  white-space: pre-wrap;
 }
 main a {
   color: #0b3142;
 }
-main .ogloszenie {
+main #ogloszenia .ogloszenie {
   cursor: pointer;
   box-shadow: black 7px 7px 25px -20px;
   border-radius: 5px;
   height: 6vh;
+  width: 60vw;
   margin-top: 1vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 1vw 0 1vw;
 }
-main .ogloszenie .tytulOferty {
+main #ogloszenia .ogloszenie .tytulOferty {
   display: flex;
   flex-direction: column;
 }
-main .ogloszenie .tytulOferty .tytul {
+main #ogloszenia .ogloszenie .tytulOferty .tytul {
   font-weight: 800;
 }
-main .ogloszenie .daneOferty {
+main #ogloszenia .ogloszenie .daneOferty {
   display: flex;
   flex-direction: row;
 }
-main .ogloszenie .daneOferty a {
+main #ogloszenia .ogloszenie .daneOferty a {
   color: #0b3142;
 }
-main .ogloszenie:hover {
+main #ogloszenia .ogloszenie:hover {
   background-color: #dbfab7;
 }
-main .numery {
+main #ogloszenia .numery {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 3vh 0 0 0;
 }
-main .numery a {
+main #ogloszenia .numery a {
   text-decoration: unset;
-  border: solid #0b3142 1px;
+  background-color: #0b3142;
+  color: #f3efe0;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1vw;
+  width: 1.5vw;
   margin: 1vh 0.1vw 0.1vw;
 }
-main .numery a:hover {
+main #ogloszenia .numery a:hover {
   background: #dbfab7;
+  color: black;
 }
-main .numery .przyciskiStrony.active {
-  font-weight: bold;
-  text-decoration: underline;
+main #ogloszenia .numery .przyciskiStrony.active {
+  font-weight: 900;
+  background-color: #f3efe0;
+  color: #0b3142;
+  border: solid #0b3142 1px;
+}
+main #loginPraktykant {
+  display: flex;
+}
+main #loginPracodawca {
+  display: none;
+}
+main .loginBox {
+  border-top: #0b3142 solid 1px;
+  border-left: #0b3142 solid 1px;
+  border-right: #0b3142 solid 1px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 20vw;
+  height: 30vh;
+}
+main .loginBox input {
+  background: unset;
+  border: solid #0b3142 1px;
+}
+main .loginBox .loginButton {
+  width: 10vw;
+}
+main .loginBox .inputText {
+  width: 15vw;
+}
+main #loginButtons {
+  border-bottom: #0b3142 solid 1px;
+  border-left: #0b3142 solid 1px;
+  border-right: #0b3142 solid 1px;
+  width: 20vw;
+  height: 5vh;
+  display: flex;
+}
+main #typKontaPraktykant {
+  background: unset;
+  border-top: unset;
+  border-left: unset;
+  border-right: solid #0b3142 1px;
+  border-bottom: unset;
+  width: 10vw;
+}
+main #typKontaPracodawca {
+  background: unset;
+  border-top: solid #0b3142 1px;
+  border-left: unset;
+  border-right: unset;
+  border-bottom: unset;
+  width: 10vw;
 }

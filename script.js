@@ -1,28 +1,17 @@
-// let userIcon = document.getElementById("login");
-// let optionDiv = document.getElementById("opcje");
-// let body = document.getElementsByTagName("body");
-// let loginPraktykant = document.getElementById("loginPraktykant");
-// let loginPracodawca = document.getElementById("loginPracodawca");
-// let loginPraktykantButton = document.getElementById("typKontaPraktykant");
-// let loginPracodawcaButton = document.getElementById("typKontaPracodawca");
+let loginPraktykant = document.getElementById("loginPraktykant");
+let loginPracodawca = document.getElementById("loginPracodawca");
+let loginPraktykantButton = document.getElementById("typKontaPraktykant");
+let loginPracodawcaButton = document.getElementById("typKontaPracodawca");
 
-// userIcon.addEventListener("click", () => {
-//   if (optionDiv.style.display === "flex") {
-//     optionDiv.style.display = "none";
-//   } else {
-//     optionDiv.style.display = "flex";
-//   }
-// });
-
-// // loginPraktykantButton.addEventListener("click", () => {
-// //   loginPraktykant.style.display = "flex";
-// //   loginPraktykantButton.style.background = "#cba135";
-// //   loginPracodawca.style.display = "none";
-// //   loginPracodawcaButton.style.background = "unset";
-// // });
-// // loginPracodawcaButton.addEventListener("click", () => {
-// //   loginPraktykant.style.display = "none";
-// //   loginPraktykantButton.style.background = "unset";
-// //   loginPracodawca.style.display = "flex";
-// //   loginPracodawcaButton.style.background = "#cba135";
-// // });
+loginPraktykantButton.addEventListener("click", () => {
+  loginPraktykantButton.style.borderRight = "solid #0b3142 1px";
+  loginPraktykantButton.style.borderTop = "unset";
+  loginPracodawcaButton.style.borderLeft = "unset";
+  loginPracodawcaButton.style.borderTop = "solid #0b3142 1px";
+});
+loginPracodawcaButton.addEventListener("click", () => {
+  loginPracodawcaButton.style.borderLeft = "solid #0b3142 1px";
+  loginPracodawcaButton.style.borderTop = "unset";
+  loginPraktykantButton.style.borderRight = "unset";
+  loginPraktykantButton.style.borderTop = "solid #0b3142 1px";
+});
