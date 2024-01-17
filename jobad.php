@@ -1,39 +1,52 @@
 
 <?php
-    include "connection.php"
+    include "connection.php";
+    session_start();
+    $loginPage = 'login.php';
+    $signupPage = 'singup.php';
+    $panelPracodawca = 'panelPracodawca.php';
+    function generatePageLink($page, $label, $params = '', $class) {
+        return "<a href='$page?$params' class='$class' >$label</a>";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.scss">
+    <link rel="stylesheet" href="style.css">
     <title>PraktyCom</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@100;300&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div id="logo"><h1><a href="index.php">PraktyCom</a></h1></div>
-        <div id="login"><img src="img/user.png" alt="Zaloguj"></div>
-        <div id="opcje">
-            <ul>
-                <li><a href="login.php">Zaloguj się</a></li>
-                <li><a href="singup.php">Zarejestruj się</a></li>
-            </ul>
-        </div>
-    </header>
-    <main>
+<header>
+    <a href="index.php" id="logo">PraktyCom</a>
+    <div id="opcje">
     <?php
-    include "connection.php";
+    if (isset($_SESSION['user_id'])) {
+        if (isset($_SESSION['user_imie']) && isset($_SESSION['user_nazwisko'])) {
+            $userParams = $_SESSION['user_imie'] . '.' . $_SESSION['user_nazwisko'] . '.' . $_SESSION['user_id'];
+            echo generatePageLink('panelPraktykanta.php', 'Konto', $userParams, '');
+        } elseif (isset($_SESSION['user_firma'])) {
+            $userParams = $_SESSION['user_firma'] . '.' . $_SESSION['user_id'];
+            echo generatePageLink('panelPracodawcy.php', 'Konto', $userParams, '');
+        }
+        echo generatePageLink('logout.php', 'Wyloguj', '', '');
+    } else {
+        echo generatePageLink($loginPage, 'Zaloguj się', '', '');
+        echo generatePageLink($signupPage, 'Zarejestruj się', '', '');
+    }
+    ?>
+    </div>
+</header>
 
-    // Sprawdzenie czy zostało przekazane ID ogłoszenia w parametrze URL
+<main>
+    <?php
     if(isset($_GET['id'])) {
         $id_ogloszenia = $_GET['id'];
-
-        // Zapytanie SQL pobierające szczegóły ogłoszenia na podstawie ID
-        $query = "SELECT oferty.id AS oferta_id, oferty.tytul AS tytul, oferty.opis AS opis, oferty.lokalizacja AS lokalizacja, oferty.poziom AS poziom, pracodawcy.firma AS firma
+        $query = "SELECT oferty.id AS oferta_id, oferty.tytul AS tytul, oferty.opis AS opis, oferty.lokalizacja AS lokalizacja, oferty.poziom AS poziom, pracodawcy.firma AS firma, pracodawcy.id AS id
                   FROM oferty
                   INNER JOIN pracodawcy ON oferty.id_pracodawcy = pracodawcy.id
                   WHERE oferty.id = ?";
@@ -41,19 +54,16 @@
         mysqli_stmt_bind_param($stmt, "i", $id_ogloszenia);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-
-        // Wyświetlenie szczegółów ogłoszenia
         if ($result && mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             $tytul = $row['tytul'];
             $firma = $row['firma'];
             $lokalizacja = $row['lokalizacja'];
+            $firmaId = $row['id'];
             $poziom = $row['poziom'];
             $opis = $row['opis'];
-
-            // Wyświetlenie szczegółów ogłoszenia
             echo '<h1>' . $tytul . '</h1>';
-            echo '<h2>' . $firma . ', ' . $lokalizacja . '</h2>';
+            echo '<h2><a href="panelPracodawca.php?' . htmlspecialchars($firma) . '.' . htmlspecialchars($firmaId) . '">' . htmlspecialchars($firma) . '</a>, ' . htmlspecialchars($lokalizacja);'</h2>';
             echo '<h2>Poziom: ' . $poziom . '</h2>';
             echo '<p>' . $opis . '</p>';
         } else {
@@ -62,7 +72,7 @@
     } else {
         echo "Brak ID ogłoszenia.";
     }
-?>
+    ?>
     </main>
     <script src="script.js"></script>
 </body>

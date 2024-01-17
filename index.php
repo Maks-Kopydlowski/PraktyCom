@@ -5,8 +5,8 @@ session_start();
 $loginPage = 'login.php';
 $signupPage = 'singup.php';
 
-function generatePageLink($page, $label, $params = '') {
-    return "<a href='$page?$params'>$label</a>";
+function generatePageLink($page, $label, $params = '', $class) {
+    return "<a href='$page?$params' class='$class' >$label</a>";
 }
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@ function generatePageLink($page, $label, $params = '') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.scss">
+    <link rel="stylesheet" href="style.css">
     <title>PraktyCom</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,24 +22,23 @@ function generatePageLink($page, $label, $params = '') {
 </head>
 <body>
 <header>
-    <div id="logo"><h1><a href="index.php">PraktyCom</a></h1></div>
-    <div id="login"><img src="img/user.png" alt="Zaloguj"></div>
+    <a href="index.php" id="logo">PraktyCom</a>
     <div id="opcje">
-        <?php
-        if (isset($_SESSION['user_id'])) {
-            if (isset($_SESSION['user_imie']) && isset($_SESSION['user_nazwisko'])) {
-                $userParams = $_SESSION['user_imie'] . '.' . $_SESSION['user_nazwisko'] . '.' . $_SESSION['user_id'];
-                echo generatePageLink('panelPraktykanta.php', 'Konto', $userParams);
-            } elseif (isset($_SESSION['user_firma'])) {
-                $userParams = $_SESSION['user_firma'] . '.' . $_SESSION['user_id'];
-                echo generatePageLink('panelPracodawcy.php', 'Konto', $userParams);
-            }
-            echo generatePageLink('logout.php', 'Wyloguj');
-        } else {
-            echo generatePageLink($loginPage, 'Zaloguj się');
-            echo generatePageLink($signupPage, 'Zarejestruj się');
+    <?php
+    if (isset($_SESSION['user_id'])) {
+        if (isset($_SESSION['user_imie']) && isset($_SESSION['user_nazwisko'])) {
+            $userParams = $_SESSION['user_imie'] . '.' . $_SESSION['user_nazwisko'] . '.' . $_SESSION['user_id'];
+            echo generatePageLink('panelPraktykanta.php', 'Konto', $userParams, '');
+        } elseif (isset($_SESSION['user_firma'])) {
+            $userParams = $_SESSION['user_firma'] . '.' . $_SESSION['user_id'];
+            echo generatePageLink('panelPracodawcy.php', 'Konto', $userParams, '');
         }
-        ?>
+        echo generatePageLink('logout.php', 'Wyloguj', '', '');
+    } else {
+        echo generatePageLink($loginPage, 'Zaloguj się', '', '');
+        echo generatePageLink($signupPage, 'Zarejestruj się', '', '');
+    }
+    ?>
     </div>
 </header>
 <main>
@@ -71,9 +70,14 @@ function generatePageLink($page, $label, $params = '') {
                 $lokalizacja = $row['lokalizacja'];
                 $poziom = $row['poziom'];
 
-                echo '<div class="ogloszenie">';
-                echo '<div class="tytulOferty"><a href="jobad.php?id=' . $id_ogloszenia . '">' . $tytul . '</a><p>' . $poziom . '</p></div>';
-                echo '<div class="daneOferty"><a href="panelPracodawca.php?' . $firma . '.' . $firmaId . '">' . $firma . '</a>, <p>' . $lokalizacja . '</p>';
+                echo '<div class="ogloszenie" onclick="location.href=\'jobad.php?id=' . htmlspecialchars($id_ogloszenia) . '\'">';
+                echo '<div class="tytulOferty">';
+                echo '<p class="tytul">' . htmlspecialchars($tytul) . '</p>';
+                echo '<p>' . htmlspecialchars($poziom) . '</p>';
+                echo '</div>';
+                echo '<div class="daneOferty">';
+                echo '<a href="panelPracodawca.php?' . htmlspecialchars($firma) . '.' . htmlspecialchars($firmaId) . '">' . htmlspecialchars($firma) . '</a>';
+                echo '<p>, ' . htmlspecialchars($lokalizacja) . '</p>';
                 echo '</div>';
                 echo '</div>';
             }
@@ -87,37 +91,30 @@ function generatePageLink($page, $label, $params = '') {
         $ilosc_ofert = $row['ilosc_ofert'];
         $liczba_stron = ceil($ilosc_ofert / $ofertyNaStrone);
 
-        // Tworzenie linków do stron
-        echo "<div id='numery'>";
+        echo "<div class='numery'>";
         if ($liczba_stron > 1) {
-            // Przycisk do pierwszej strony
-            echo generatePageLink('index.php', '&laquo;&laquo;');
-            // Przycisk do poprzedniej strony
+            echo generatePageLink('index.php', '&laquo;&laquo;', '', '');
             if ($strona > 1) {
                 $poprzednia = $strona - 1;
-                echo generatePageLink('index.php', '&laquo;', "strona=$poprzednia");
+                echo generatePageLink('index.php', '&laquo;', "strona=$poprzednia", '');
             }
-            // Linki do kolejnych stron
             for ($i = 1; $i <= $liczba_stron; $i++) {
                 if ($i == $strona) {
-                    echo "<a href='index.php?strona=$i' class='przyciskiStrony active'>$i</a> ";
+                    echo generatePageLink('index.php', $i, "strona=$i", 'przyciskiStrony active');
                 } else {
-                    echo "<a href='index.php?strona=$i' class='przyciskiStrony'>$i</a> ";
+                    echo generatePageLink('index.php', $i, "strona=$i", 'przyciskiStrony');
                 }
             }
-            // Przycisk do następnej strony
             if ($strona < $liczba_stron) {
                 $nastepna = $strona + 1;
-                echo generatePageLink('index.php', '&raquo;', "strona=$nastepna");
+                echo generatePageLink('index.php', '&raquo;', "strona=$nastepna", '');
             }
-            // Przycisk do ostatniej strony
-            echo generatePageLink('index.php', '&raquo;&raquo;', "strona=$liczba_stron");
+            echo generatePageLink('index.php', '&raquo;&raquo;', "strona=$liczba_stron", '');
         }
         echo "</div>";
         ?>
     </div>
 </main>
-
     <script src="script.js"></script>
 </body>
 </html>

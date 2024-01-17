@@ -1,0 +1,100 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto Mono", monospace;
+}
+
+html {
+  font-size: 1.8vh;
+  background: #f3efe0;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 7vh;
+  border-bottom: solid #0b3142 1px;
+}
+header #logo {
+  font-size: 1.8rem;
+  color: #0b3142;
+  font-weight: 800;
+  margin-left: 0;
+  height: 4vh;
+  margin-left: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header #opcje {
+  display: flex;
+  margin-right: 2vw;
+}
+header #opcje a {
+  color: #0b3142;
+  text-decoration: unset;
+  margin-left: 1vw;
+}
+header #opcje a:hover {
+  color: rgb(22, 48, 65);
+  text-decoration: underline;
+}
+
+main {
+  margin: 5vh 10vw 0 10vw;
+  min-height: 50vh;
+}
+main a {
+  color: #0b3142;
+}
+main .ogloszenie {
+  cursor: pointer;
+  box-shadow: black 7px 7px 25px -20px;
+  border-radius: 5px;
+  height: 6vh;
+  margin-top: 1vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1vw 0 1vw;
+}
+main .ogloszenie .tytulOferty {
+  display: flex;
+  flex-direction: column;
+}
+main .ogloszenie .tytulOferty .tytul {
+  font-weight: 800;
+}
+main .ogloszenie .daneOferty {
+  display: flex;
+  flex-direction: row;
+}
+main .ogloszenie .daneOferty a {
+  color: #0b3142;
+}
+main .ogloszenie:hover {
+  background-color: #dbfab7;
+}
+main .numery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .numery a {
+  text-decoration: unset;
+  border: solid #0b3142 1px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1vw;
+  margin: 1vh 0.1vw 0.1vw;
+}
+main .numery a:hover {
+  background: #dbfab7;
+}
+main .numery .przyciskiStrony.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
