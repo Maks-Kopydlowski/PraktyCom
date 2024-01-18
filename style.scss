@@ -47,6 +47,41 @@ body {
   flex-direction: column;
 }
 main {
+  .rejestracjaBox {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    justify-content: space-between;
+    .formularzRejestracja {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 15vw;
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        input {
+          background: unset;
+          border: #0b3142 solid 1px;
+          margin-bottom: 1vh;
+        }
+        .button {
+          cursor: pointer;
+        }
+      }
+      h3 {
+        margin-bottom: 2vh;
+      }
+    }
+    .opisy {
+      width: 20vw;
+      margin-top: 5vh;
+      p {
+        margin-bottom: 2vh;
+      }
+    }
+  }
   pre {
     white-space: pre-wrap;
   }
@@ -110,8 +145,6 @@ main {
         background: #dbfab7;
         color: black;
       }
-      .przyciskiStrony {
-      }
 
       .przyciskiStrony.active {
         font-weight: 900;
@@ -140,6 +173,7 @@ main {
     input {
       background: unset;
       border: solid $color1 1px;
+      padding: 0.1vw;
     }
     .loginButton {
       width: 10vw;
@@ -163,14 +197,16 @@ main {
     border-right: solid $color1 1px;
     border-bottom: unset;
     width: 10vw;
+    cursor: unset;
   }
   #typKontaPracodawca {
-    background: unset;
+    background: #dbfab7;
     border-top: solid $color1 1px;
     border-left: unset;
     border-right: unset;
     border-bottom: unset;
     width: 10vw;
+    cursor: pointer;
   }
 }
 
