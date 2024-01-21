@@ -34,41 +34,7 @@ function generatePageLink($page, $label, $params = '', $class) {
     </div>
 </header>
 <main>
-<form action="upload.php" method="post" enctype="multipart/form-data">
-    Wybierz obraz:
-    <input type="file" name="image" id="image">
-    <input type="submit" value="Prześlij obraz" name="submit">
-</form>
-<?php
-if (isset($_SESSION['user_id'])) {
-    $userId = $_SESSION['user_id'];
 
-    // Pobierz obraz bezpośrednio z bazy danych na podstawie identyfikatora użytkownika
-    $sql = "SELECT zdjecie FROM praktykanci WHERE id = $userId";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $imageData = $row['zdjecie'];
-
-        // Ustawienie nagłówka Content-type na typ obrazu
-        header("Content-type: image/jpeg");
-
-        // Wyświetlanie obrazu
-        echo base64_decode($imageData);
-    } else {
-        // Jeśli brak obrazu, wyświetl domyślowe zdjęcie profilowe lub komunikat
-        // Możesz zastąpić poniższą ścieżkę do domyślnego obrazu lub dostosować komunikat
-        echo file_get_contents("default_profile_image.jpg");
-    }
-} else {
-    // Jeśli użytkownik niezalogowany, wyświetl domyślowe zdjęcie profilowe lub komunikat
-    // Możesz zastąpić poniższą ścieżkę do domyślnego obrazu lub dostosować komunikat
-    echo file_get_contents("default_profile_image.jpg");
-}
-
-$conn->close();
-?>
 </main>
 </body>
 </html>
