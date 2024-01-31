@@ -1,13 +1,12 @@
 <?php
 include "connection.php";
+// include "checkData.php";
 session_start();
 
 $loginPage = 'login.php';
 $signupPage = 'singup.php';
 
-function generatePageLink($page, $label, $params = '', $class) {
-    return "<a href='$page?$params' class='$class' >$label</a>";
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -27,10 +26,11 @@ function generatePageLink($page, $label, $params = '', $class) {
     <?php
     if (isset($_SESSION['user_id'])) {
         if (isset($_SESSION['user_imie']) && isset($_SESSION['user_nazwisko'])) {
-            $userParams = $_SESSION['user_imie'] . '.' . $_SESSION['user_nazwisko'] . '.' . $_SESSION['user_id'];
+        $userParams = "imie=".$_SESSION['user_imie'] . '&nazwisko=' . $_SESSION['user_nazwisko'] . '&id=' . $_SESSION['user_id'];
+
             echo generatePageLink('panelPraktykanta.php', 'Konto', $userParams, '');
         } elseif (isset($_SESSION['user_firma'])) {
-            $userParams = $_SESSION['user_firma'] . '.' . $_SESSION['user_id'];
+            $userParams = "nazwa=".$_SESSION['user_firma'] . '&id=' . $_SESSION['user_id'];
             echo generatePageLink('panelPracodawcy.php', 'Konto', $userParams, '');
         }
         echo generatePageLink('logout.php', 'Wyloguj', '', '');
@@ -46,7 +46,7 @@ function generatePageLink($page, $label, $params = '', $class) {
     <?php
     if(isset($_GET['id'])) {
         $id_ogloszenia = $_GET['id'];
-        $query = "SELECT oferty.id AS oferta_id, oferty.tytul AS tytul, oferty.opis AS opis, oferty.lokalizacja AS lokalizacja, oferty.poziom AS poziom, pracodawcy.firma AS firma, pracodawcy.id AS id
+        $query = "SELECT oferty.id AS oferta_id, oferty.tytul AS tytul, oferty.opis AS opis, oferty.lokalizacja AS lokalizacja, pracodawcy.firma AS firma, pracodawcy.id AS id
                   FROM oferty
                   INNER JOIN pracodawcy ON oferty.id_pracodawcy = pracodawcy.id
                   WHERE oferty.id = ?";
@@ -60,13 +60,12 @@ function generatePageLink($page, $label, $params = '', $class) {
             $firma = $row['firma'];
             $lokalizacja = $row['lokalizacja'];
             $firmaId = $row['id'];
-            $poziom = $row['poziom'];
             $opis = $row['opis'];
             echo '<h1>' . $tytul . '</h1>';
-            echo '<h2><a href="panelPracodawca.php?' . htmlspecialchars($firma) . '.' . htmlspecialchars($firmaId) . '">' . htmlspecialchars($firma) . '</a>, ' . htmlspecialchars($lokalizacja);'</h2>';
-            echo '<h2>Poziom: ' . $poziom . '</h2>';
+            $userParams = "firma=".$firma . '&id=' . $firmaId;
+            echo '<h2>'.generatePageLink('panelPracodawca.php', $firma, $userParams, '').", ".$lokalizacja.'</h2>';
             echo '<pre>' . $opis . '</pre>';
-            echo '<button>APLIKUJ</button>';
+            echo '<button class="aplikuj">APLIKUJ</button>';
         } else {
             echo "Brak danych lub błąd zapytania.";
         }

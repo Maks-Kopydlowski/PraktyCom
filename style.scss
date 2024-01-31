@@ -47,6 +47,13 @@ body {
   flex-direction: column;
 }
 main {
+  p {
+    text-align: center;
+    max-width: 20vw;
+    padding-bottom: 2vh;
+    border-left: solid 1px #0b3142;
+    border-right: solid 1px #0b3142;
+  }
   .rejestracjaBox {
     display: flex;
     flex-direction: row;
@@ -84,8 +91,20 @@ main {
   }
   pre {
     white-space: pre-wrap;
+    max-width: 75vw;
   }
-  margin: 5vh 0 0 0;
+  .aplikuj {
+    background: unset;
+    border: 1px solid $color1;
+    padding: 1vh;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 1vh;
+  }
+  .aplikuj:hover {
+    background-color: #dbfab7;
+  }
+  margin: 3vh 0 0 0;
   min-height: 50vh;
   a {
     color: $color1;
@@ -209,211 +228,3 @@ main {
     cursor: pointer;
   }
 }
-
-// #oglsozenia {
-//   background-color: lightblue;
-// }
-// * {
-//   margin: 0;
-//   padding: 0;
-//   font-family: "Roboto Mono", monospace;
-//   border: unset;
-//   background: unset;
-//   font-size: 1.2rem;
-// }
-
-// header {
-//   background-color: #000;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   height: 4vh;
-//   padding: 1vh;
-//   #logo {
-//     h1 {
-//       a {
-//         color: #cba135;
-//         text-decoration: none;
-//       }
-//     }
-//   }
-//   #login {
-//     img {
-//       height: 5vh;
-//       cursor: pointer;
-//     }
-//   }
-//   #opcje {
-//     display: none;
-//     position: absolute;
-//     background: #000;
-//     right: 1vw;
-//     top: 6.1vh;
-//     padding: 1vh;
-
-//     ul {
-//       list-style: none;
-//       li {
-//         margin: 0.5vh;
-//       }
-//       a {
-//         color: white;
-//         display: block;
-//         margin: 0.5vh;
-//       }
-//       a:hover {
-//         color: #cba135;
-//       }
-//       #wyloguj {
-//         // font-size: 1.2rem;
-//         color: white;
-//         text-decoration: underline;
-//         cursor: pointer;
-//       }
-//       #wyloguj:hover {
-//         color: #cba135;
-//       }
-//     }
-//   }
-// }
-// main {
-//   background-color: $color2;
-//   // padding-top: 10vh;
-//   min-height: 100vh;
-//   margin: 0;
-//   display: flex;
-//   align-items: center;
-//   flex-direction: column;
-//   #oglsozenia {
-//     margin: 5vh 0 2vh 0;
-//     .ogloszenie {
-//       align-items: start;
-//       padding: 1vw;
-//       margin: 0 15vw 0 15vw;
-//       border: solid rgba(0, 0, 0, 0.3) 1px;
-//       margin-bottom: 1vh;
-//       width: 60vw;
-//       display: flex;
-//       justify-content: space-between;
-//       align-items: center;
-//       #daneOferty {
-//         display: flex;
-//         align-items: center;
-//         p {
-//           margin: 0 0 0 0.5vw;
-//         }
-//         // gwiazda {
-//         // }
-//       }
-//       a {
-//         color: #cba135;
-//       }
-
-//       #gwiazda {
-//         color: black;
-//         font-size: 1.5rem;
-//         height: unset;
-//         cursor: pointer;
-//         margin: 0 0 0 0.5vw;
-//       }
-//       #gwiazdaUlobione {
-//         color: #cba135;
-//         font-size: 1.5rem;
-//       }
-//     }
-//     #numery {
-//       display: flex;
-//       justify-content: center;
-//       a {
-//         margin: 0 0.2vw 0 0.2vw;
-//       }
-//     }
-//   }
-//   .przyciskiStrony {
-//     color: #cba135;
-//   }
-// }
-// #mainRejestracja {
-//   padding: 0 15vw 0 15vw;
-//   height: 94vh;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: center;
-//   .button {
-//     cursor: pointer;
-//   }
-//   div {
-//     margin: 1vw;
-//   }
-//   .opisy {
-//     p {
-//       margin-bottom: 1vh;
-//       font-weight: 1000;
-//     }
-//     ul {
-//       margin-left: 0.1vw;
-//     }
-//   }
-//   .formularzRejestracja {
-//     width: 30vw;
-//     height: 50vh;
-//     border: black solid 1px;
-//     text-align: center;
-
-//     form {
-//       display: flex;
-//       justify-content: center;
-//       flex-direction: column;
-//       input {
-//         border: 1px solid black;
-//         margin: 1vh;
-//         padding: 0.1vh;
-//       }
-//     }
-//   }
-// }
-// #mainLogowanie {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-direction: column;
-//   #loginPraktykant {
-//     display: none;
-//     justify-content: unset;
-//     align-items: unset;
-//     flex-direction: column;
-//     margin: 1vh 0 1vh 0;
-//     input {
-//       border: 1px solid black;
-//       padding: 0.1vh;
-//     }
-//   }
-//   #loginPracodawca {
-//     display: none;
-//     justify-content: unset;
-//     align-items: unset;
-//     flex-direction: column;
-//     margin: 1vh 0 1vh 0;
-//     input {
-//       border: 1px solid black;
-//       padding: 0.1vh;
-//     }
-//   }
-//   #loginButtons {
-//     display: flex;
-//     flex-direction: row;
-//     #typKontaPraktykant {
-//       cursor: pointer;
-//       border: solid black 1px;
-//       margin: 1vw;
-//       padding: 1vw;
-//     }
-//     #typKontaPracodawca {
-//       cursor: pointer;
-//       border: solid black 1px;
-//       margin: 1vw;
-//       padding: 1vw;
-//     }
-//   }
-// }

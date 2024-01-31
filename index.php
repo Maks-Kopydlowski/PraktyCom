@@ -1,13 +1,11 @@
 <?php
 include "connection.php";
+include "checkData.php";
+
 session_start();
 
-$loginPage = 'login.php';
-$signupPage = 'singup.php';
 
-function generatePageLink($page, $label, $params = '', $class) {
-    return "<a href='$page?$params' class='$class' >$label</a>";
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -27,11 +25,11 @@ function generatePageLink($page, $label, $params = '', $class) {
     <?php
     if (isset($_SESSION['user_id'])) {
         if (isset($_SESSION['user_imie']) && isset($_SESSION['user_nazwisko'])) {
-            $userParams = $_SESSION['user_imie'] . '.' . $_SESSION['user_nazwisko'] . '.' . $_SESSION['user_id'];
+            $userParams = "imie=".$_SESSION['user_imie'] . '&nazwisko=' . $_SESSION['user_nazwisko'] . '&id=' . $_SESSION['user_id'];
             echo generatePageLink('panelPraktykanta.php', 'Konto', $userParams, '');
         } elseif (isset($_SESSION['user_firma'])) {
-            $userParams = $_SESSION['user_firma'] . '.' . $_SESSION['user_id'];
-            echo generatePageLink('panelPracodawcy.php', 'Konto', $userParams, '');
+            $userParams = "firma=" . $_SESSION['user_firma'] . '&id=' . $_SESSION['user_id'];
+            echo generatePageLink('panelPracodawca.php', 'Konto', $userParams, '');
         }
         echo generatePageLink('logout.php', 'Wyloguj', '', '');
     } else {
@@ -53,7 +51,7 @@ function generatePageLink($page, $label, $params = '', $class) {
         }
 
         $poczatek = ($strona - 1) * $ofertyNaStrone;
-        $query = "SELECT oferty.id AS oferta_id, oferty.tytul AS tytul, oferty.lokalizacja AS lokalizacja, oferty.poziom AS poziom, pracodawcy.firma AS firma, pracodawcy.id AS id
+        $query = "SELECT oferty.id AS oferta_id, oferty.tytul AS tytul, oferty.lokalizacja AS lokalizacja, pracodawcy.firma AS firma, pracodawcy.id AS id
                   FROM oferty
                   INNER JOIN pracodawcy ON oferty.id_pracodawcy = pracodawcy.id
                   ORDER BY oferty.id DESC
@@ -68,16 +66,14 @@ function generatePageLink($page, $label, $params = '', $class) {
                 $firma = $row['firma'];
                 $firmaId = $row['id'];
                 $lokalizacja = $row['lokalizacja'];
-                $poziom = $row['poziom'];
-
-                echo '<div class="ogloszenie" onclick="location.href=\'jobad.php?id=' . htmlspecialchars($id_ogloszenia) . '\'">';
+                echo '<div class="ogloszenie" onclick="location.href=\'jobad.php?id=' . $id_ogloszenia . '\'">';
                 echo '<div class="tytulOferty">';
-                echo '<p class="tytul">' . htmlspecialchars($tytul) . '</p>';
-                echo '<p>' . htmlspecialchars($poziom) . '</p>';
+                echo '<p class="tytul">' . $tytul . '</p>';
                 echo '</div>';
                 echo '<div class="daneOferty">';
-                echo '<a href="panelPracodawca.php?' . htmlspecialchars($firma) . '.' . htmlspecialchars($firmaId) . '">' . htmlspecialchars($firma) . '</a>';
-                echo '<p>, ' . htmlspecialchars($lokalizacja) . '</p>';
+                $userParams = "firma=".$firma . '&id=' . $firmaId;
+                echo generatePageLink('panelPracodawca.php', $firma, $userParams, '');
+                echo '<p>, ' . $lokalizacja . '</p>';
                 echo '</div>';
                 echo '</div>';
             }

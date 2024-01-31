@@ -4,9 +4,7 @@
 $loginPage = 'login.php';
 $signupPage = 'singup.php';
 
-function generatePageLink($page, $label, $params = '', $class) {
-    return "<a href='$page?$params' class='$class' >$label</a>";
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -26,10 +24,11 @@ function generatePageLink($page, $label, $params = '', $class) {
     <?php
     if (isset($_SESSION['user_id'])) {
         if (isset($_SESSION['user_imie']) && isset($_SESSION['user_nazwisko'])) {
-            $userParams = $_SESSION['user_imie'] . '.' . $_SESSION['user_nazwisko'] . '.' . $_SESSION['user_id'];
+                        $userParams = "imie=".$_SESSION['user_imie'] . '&nazwisko=' . $_SESSION['user_nazwisko'] . '&id=' . $_SESSION['user_id'];
+
             echo generatePageLink('panelPraktykanta.php', 'Konto', $userParams, '');
         } elseif (isset($_SESSION['user_firma'])) {
-            $userParams = $_SESSION['user_firma'] . '.' . $_SESSION['user_id'];
+            $userParams = "nazwa=".$_SESSION['user_firma'] . '&id=' . $_SESSION['user_id'];
             echo generatePageLink('panelPracodawcy.php', 'Konto', $userParams, '');
         }
         echo generatePageLink('logout.php', 'Wyloguj', '', '');
