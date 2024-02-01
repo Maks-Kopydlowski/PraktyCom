@@ -1,6 +1,6 @@
 <?php
 include "connection.php";
-include "checkData.php";
+//include "checkData.php";
 
 session_start();
 
@@ -30,6 +30,7 @@ session_start();
         } elseif (isset($_SESSION['user_firma'])) {
             $userParams = "firma=" . $_SESSION['user_firma'] . '&id=' . $_SESSION['user_id'];
             echo generatePageLink('panelPracodawca.php', 'Konto', $userParams, '');
+            echo generatePageLink('addAd.php', 'Dodaj ogłoszenie', '', '');
         }
         echo generatePageLink('logout.php', 'Wyloguj', '', '');
     } else {

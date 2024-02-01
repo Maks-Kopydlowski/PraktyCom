@@ -14,7 +14,7 @@ header {
   align-items: center;
   justify-content: space-between;
   height: 7vh;
-  width: 100vw;
+  width: 100%;
   box-shadow: 0 0 10px 0;
 }
 header #logo {
@@ -52,7 +52,20 @@ main {
   margin: 3vh 0 0 0;
   min-height: 50vh;
 }
-main p {
+main .dodajOgloszenie form {
+  display: flex;
+  flex-direction: column;
+}
+main .dodajOgloszenie form input {
+  margin: 1vh 0 1vh 0;
+  background: unset;
+  border: #0b3142 solid 1px;
+}
+main .dodajOgloszenie form .opublikujButton:hover {
+  background: #dbfab7;
+  cursor: pointer;
+}
+main .bladLogowania {
   text-align: center;
   max-width: 20vw;
   padding-bottom: 2vh;
@@ -83,6 +96,9 @@ main .rejestracjaBox .formularzRejestracja form input {
 }
 main .rejestracjaBox .formularzRejestracja form .button {
   cursor: pointer;
+}
+main .rejestracjaBox .formularzRejestracja form .button:hover {
+  background: #dbfab7;
 }
 main .rejestracjaBox .formularzRejestracja h3 {
   margin-bottom: 2vh;

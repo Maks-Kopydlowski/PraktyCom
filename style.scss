@@ -14,7 +14,7 @@ header {
   align-items: center;
   justify-content: space-between;
   height: 7vh;
-  width: 100vw;
+  width: 100%;
   box-shadow: 0 0 10px 0;
   #logo {
     font-size: 1.8rem;
@@ -47,7 +47,22 @@ body {
   flex-direction: column;
 }
 main {
-  p {
+  .dodajOgloszenie {
+    form {
+      display: flex;
+      flex-direction: column;
+      input {
+        margin: 1vh 0 1vh 0;
+        background: unset;
+        border: #0b3142 solid 1px;
+      }
+      .opublikujButton:hover {
+        background: #dbfab7;
+        cursor: pointer;
+      }
+    }
+  }
+  .bladLogowania {
     text-align: center;
     max-width: 20vw;
     padding-bottom: 2vh;
@@ -75,6 +90,9 @@ main {
         }
         .button {
           cursor: pointer;
+        }
+        .button:hover {
+          background: #dbfab7;
         }
       }
       h3 {

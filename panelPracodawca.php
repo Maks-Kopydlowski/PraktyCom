@@ -1,6 +1,6 @@
 <?php
 include "connection.php";
-include "checkData.php";
+//include "checkData.php";
 session_start();
 
 $loginPage = 'login.php';

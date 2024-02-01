@@ -63,7 +63,7 @@ $signupPage = 'singup.php';
             <ul>
                 <li>Natychmiastowe aplikowanie na oferty. - wkrótce!</li>
                 <li>Zapisanie CV i listu motywacyjnego w jednym miejscu. - wkrótce!</li>
-                <li>System zapisywania interesujących ofert. - wkrótce!</li>
+                <li>System zapisywania interesujących nas ofert. - wkrótce!</li>
             </ul>
         </div>
         <div id="pracodawcaRejestracja" class="formularzRejestracja">
@@ -85,7 +85,7 @@ $signupPage = 'singup.php';
         <div id="pracodawcaOpis" class="opisy">
             <p>Co daje rejestracja w serwisie jako Pracodawca?</p>
             <ul>
-                <li>Łatwe dodawanie ofert. - wkrótce!</li>
+                <li>Łatwe dodawanie ofert.</li>
                 <li>Licznik ile razy dana oferta była otwarta. - wkrótce!</li>
                 <li>System zarządzania rekrutowanymi. - wkrótce!</li>
             </ul>
