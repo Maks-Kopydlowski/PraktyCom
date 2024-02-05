@@ -5,9 +5,7 @@ session_start();
 $loginPage = 'login.php';
 $signupPage = 'singup.php';
 
-function generatePageLink($page, $label, $params = '', $class) {
-    return "<a href='$page?$params' class='$class' >$label</a>";
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -26,15 +24,27 @@ function generatePageLink($page, $label, $params = '', $class) {
     <div id="opcje">
     <?php
     if (isset($_SESSION['user_id'])) {
+        if (isset($_SESSION['user_firma'])) {
+            $userParams = "nazwa=".$_SESSION['user_firma'] . '&id=' . $_SESSION['user_id'];
+            echo generatePageLink('panelPracodawcy.php', 'Konto', $userParams, '');
+        }
         echo generatePageLink('logout.php', 'Wyloguj', '', '');
     } else {
-        header("Location: index.php");
+        echo generatePageLink($loginPage, 'Zaloguj się', '', '');
+        echo generatePageLink($signupPage, 'Zarejestruj się', '', '');
     }
     ?>
     </div>
 </header>
 <main>
-
+<img src="img/user.png" alt="user.img">
+<div class="description">
+<?php
+echo "Imię: " . $_GET['imie'];
+echo "<br>";
+echo "Nazwisko:" . $_GET['nazwisko'];
+?>
+</div>
 </main>
 </body>
 </html>

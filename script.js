@@ -12,6 +12,8 @@ loginPraktykantButton.addEventListener("click", () => {
   loginPraktykantButton.style.background = "#f3efe0";
   loginPraktykantButton.style.cursor = "unset";
   loginPracodawcaButton.style.cursor = "pointer";
+  loginPracodawca.style.display = "none";
+  loginPraktykant.style.display = "flex";
 });
 loginPracodawcaButton.addEventListener("click", () => {
   loginPracodawcaButton.style.borderLeft = "solid #0b3142 1px";
@@ -22,4 +24,6 @@ loginPracodawcaButton.addEventListener("click", () => {
   loginPracodawcaButton.style.background = "#f3efe0";
   loginPraktykantButton.style.cursor = "pointer";
   loginPracodawcaButton.style.cursor = "unset";
+  loginPracodawca.style.display = "flex";
+  loginPraktykant.style.display = "none";
 });
